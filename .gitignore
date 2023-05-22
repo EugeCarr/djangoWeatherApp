@@ -1,1 +1,3 @@
 weatherVenv/
+the_weather/the_weather/__pycache__
+the_weather/db.sqlite3
