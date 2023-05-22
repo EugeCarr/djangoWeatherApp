@@ -2,6 +2,7 @@ from django.shortcuts import render
 import requests
 import os
 from .models import City
+from .forms import CityForm
 
 def index(request):
     path = os.getcwd()
@@ -12,12 +13,18 @@ def index(request):
 
     cities = City.objects.all()
 
+    if request.method == 'POST': 
+        form = CityForm(request.POST)
+        form.save()
+
+    form = CityForm()
+
     weather_data = []
 
     for city in cities:
 
 
-        city_weather = requests.get(url.format(city)).json()
+        city_weather = requests.get(url.format(city)).json()        
 
         weather =  {
             'city': city,
@@ -28,8 +35,7 @@ def index(request):
         
         weather_data.append(weather)
 
-    print(str(weather_data))
-    context = {'weather_data': weather_data}
+    context = {'weather_data': weather_data, 'form': form}
 
 
     return render(request, 'weather/index.html', context)
