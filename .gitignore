@@ -3,3 +3,4 @@ the_weather/the_weather/__pycache__
 the_weather/db.sqlite3
 the_weather/weather/__pycache__
 api keys.txt
+.env
